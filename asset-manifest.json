@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/lthit/static/css/main.64ae9087.css",
+    "main.js": "/lthit/static/js/main.7eed61eb.js",
+    "static/media/sditsolutions.jpg.png": "/lthit/static/media/sditsolutions.jpg.bfb40df5cce23ea7d88f.png",
+    "index.html": "/lthit/index.html",
+    "main.64ae9087.css.map": "/lthit/static/css/main.64ae9087.css.map",
+    "main.7eed61eb.js.map": "/lthit/static/js/main.7eed61eb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.64ae9087.css",
+    "static/js/main.7eed61eb.js"
+  ]
+}
