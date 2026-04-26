@@ -1,8 +1,12 @@
 import React from "react";
+import myImage from './img/myimg.png.jpeg';
+import kiShow from './img/kishow.jpg.jpeg';
 
 const teamData = [
-  { id: 1, img: "https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg", name: "Saurabh  Dhage", role: "Founder & CEO" },
-  { id: 2, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQffVXFgYxENiH-VLaMIoiIgkDilyO2hA9VIw&s", name: "Kishor Wavare", role: "Co-Founder & CTO" },
+  
+  { id: 1, img: myImage, name: "Saurabh Dhage", role: "Founder & CEO" },
+  
+  { id: 2, img: kiShow, name: "Kishor Wavare", role: "Co-Founder & CTO" },
   { id: 3, img: "https://media.istockphoto.com/id/1399565382/photo/young-happy-mixed-race-businessman-standing-with-his-arms-crossed-working-alone-in-an-office.jpg?s=612x612&w=0&k=20&c=buXwOYjA_tjt2O3-kcSKqkTp2lxKWJJ_Ttx2PhYe3VM=", name: "Rahul Shinde", role: "Full Stack Development & Cloud Computing." },
   { id: 4, img: "https://t4.ftcdn.net/jpg/02/14/74/61/360_F_214746128_31JkeaP6rU0NzzzdFC4khGkmqc8noe6h.jpg", name: "sandip Dhage", role: "UI/UX Design & Frontend Technologies (React)." },
 ];

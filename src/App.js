@@ -9,6 +9,9 @@ import Services from "./Services";
 import Contact from "./Contact";
 import Careers from "./Careers";
 import Gallery from "./Gallery";
+import Login from "./Login.jsx";
+
+
 import './index.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -19,7 +22,8 @@ function App() {
      <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home/>} />
+        <Route path="login" element={<Login />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
@@ -28,6 +32,9 @@ function App() {
         <Route path="/careers" element={<Careers />} />
         <Route path="/gallery" element={<Gallery />} />
       </Routes>
+
+      <Login/>
+      
       <Footer />
      </Router>
 

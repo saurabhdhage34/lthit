@@ -1,120 +1,192 @@
-import React from "react";
+import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const editors = [
-  { id: 1, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFZz_EAbRPI33cqpyrdjUWfCPKcIRqjzFhGw&s", name: "Name Goes Here" },
-  { id: 2, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFZz_EAbRPI33cqpyrdjUWfCPKcIRqjzFhGw&s", name: "Name Goes Here" },
-  { id: 3, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFZz_EAbRPI33cqpyrdjUWfCPKcIRqjzFhGw&s", name: "Name Goes Here" },
+  {
+    id: 1,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFZz_EAbRPI33cqpyrdjUWfCPKcIRqjzFhGw&s",
+    name: "Saurabh Dhage",
+  },
+  {
+    id: 2,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFZz_EAbRPI33cqpyrdjUWfCPKcIRqjzFhGw&s",
+    name: "SD IT Team",
+  },
 ];
 
 function Contact() {
-  return (
-    <div>
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    service: "Web Development",
+    message: "",
+  });
 
-        <div class="page-header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2>Contact Us</h2>
-                        </div>
-                        <div class="col-12">
-                            <a href="">Home</a>
-                            <a href="">Contact Us</a>
-                        </div>
-                    </div>
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      service: formData.service,
+      message: formData.message,
+    };
+
+    emailjs
+      .send(
+        "service_fg1e6gt",     // ✅ correct service ID
+        "template_zbqg1ki",    // ✅ correct template ID
+        templateParams,
+        "4C5PCsyZ5vEWYByW-"    // ✅ public key
+      )
+      .then(() => {
+        alert("✅ नमस्कार " + formData.name + ", तुमचा संदेश यशस्वी पाठवला!");
+        
+        setFormData({
+          name: "",
+          email: "",
+          service: "Web Development",
+          message: "",
+        });
+      })
+      .catch((error) => {
+        console.log("ERROR:", error);
+        alert("❌ काहीतरी error आला, कृपया पुन्हा प्रयत्न करा.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+ return (
+    <div className="contact-page">
+      {/* Header */}
+      <div className="page-header text-center py-5 bg-light">
+        <h2 className="fw-bold">Contact Us</h2>
+        <p className="text-muted">
+          <a href="/" className="text-decoration-none">Home</a> / Contact Us
+        </p>
+      </div>
+
+      <div className="container my-5">
+        <div className="row">
+
+          {/* FORM SECTION */}
+          <div className="col-md-7">
+            <div className="card p-4 shadow-sm border-0">
+              <h3 className="mb-4 fw-semibold">Send Us a Message</h3>
+
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label className="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    className="form-control"
+                    placeholder="Enter your full name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
+
+                <div className="mb-3">
+                  <label className="form-label">Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    className="form-control"
+                    placeholder="example@mail.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">Select Service</label>
+                  <select
+                    name="service"
+                    className="form-select"
+                    value={formData.service}
+                    onChange={handleChange}
+                  >
+                    <option value="Web Development">Web Development</option>
+                    <option value="App Development">App Development</option>
+                    <option value="Software Solutions">Software Solutions</option>
+                    <option value="CCTV & Security">CCTV & Security</option>
+                  </select>
+                </div>
+
+                <div className="mb-4">
+                  <label className="form-label">Your Message</label>
+                  <textarea
+                    name="message"
+                    className="form-control"
+                    rows="4"
+                    placeholder="How can we help you?"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary w-100 py-2 fw-bold"
+                  disabled={loading}
+                >
+                  {loading ? "Sending..." : "Send Message"}
+                </button>
+              </form>
             </div>
-
-      {/* Contact Section */}
-      <div className="contact">
-        <div className="container">
-          <div className="row">
-
-            {/* Left Side */}
-            <div className="col-md-6">
-              <h2 className="section-title">Get In Touch</h2>
-
-              <div className="contact-info">
-
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.8657333246992!2d-73.95447848459209!3d40.80894417932154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f613438663b5%3A0xce20073c8862af08!2sW%20123rd%20St%2C%20New%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1589004464646!5m2!1sen!2sbd"
-                  title="map"
-                  style={{ border: 0, width: "100%", height: "250px" }}
-                  allowFullScreen=""
-                  loading="lazy"
-                ></iframe>
-
-                <h3>How to reach us:</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Curabitur facilisis ornare velit non vulputate.
-                </p>
-
-                <h3>
-                  Mobile <span>+012 345 6789</span>
-                </h3>
-
-                <h3>
-                  E-mail <span>contact@example.com</span>
-                </h3>
-
-              </div>
-            </div>
-
-            {/* Right Side */}
-            <div className="col-md-6">
-              <div className="editor-info">
-
-                <h2 className="section-title">Contact Person</h2>
-
-                {editors.map((person) => (
-                  <div key={person.id} className="editor-item">
-
-                    <div className="editor-img">
-                      <img src={person.img} alt="Editor" />
-                    </div>
-
-                    <div className="editor-text">
-                      <h3>{person.name}</h3>
-                      <a href="mailto:email@example.com">Email Now</a>
-                    </div>
-
-                  </div>
-                ))}
-
-              </div>
-            </div>
-
           </div>
-        </div>
-      </div>
 
-      {/* Call To Action */}
-      <div className="call-to-action">
-        <div className="container">
-          <div className="row align-items-center">
-
-            <div className="col-md-9">
-              <h2>Get A Free HTML Template</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          {/* CONTACT INFO SECTION */}
+          <div className="col-md-5">
+            <div className="ps-md-4 mt-5 mt-md-0">
+              <h4 className="fw-bold">Contact Information</h4>
+              <p className="mb-2">
+                <strong>Address:</strong> Shevgaon, Ahmednagar, Maharashtra, India.
               </p>
-            </div>
+              <p className="mb-2">
+                <strong>Phone:</strong> +91 7499802143
+              </p>
+              <p className="mb-4">
+                <strong>Email:</strong> saurabhdhage20114@gmail.com
+              </p>
 
-            <div className="col-md-3">
-              <a
-                className="btn"
-                href="https://htmlcodex.com/contact"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Contact Us
-              </a>
-            </div>
+              <hr />
+              <h5 className="mt-4 mb-3">Core Team</h5>
 
+              {editors.map((person) => (
+                <div key={person.id} className="d-flex align-items-center mb-3">
+                  <img
+                    src={person.img}
+                    alt={person.name}
+                    className="rounded-circle me-3 shadow-sm"
+                    width="55"
+                    height="55"
+                    style={{ objectFit: "cover" }}
+                  />
+                  <div>
+                    <h6 className="mb-0 fw-bold">{person.name}</h6>
+                    <small className="text-muted">SD IT Solutions</small>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
+
         </div>
       </div>
-
     </div>
   );
 }
